@@ -1,0 +1,67 @@
+<!-- BY VINICIO GUAMÁN PUNTONET.EC USER DEV005 V06-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Estudiante</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Mi Aplicación</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Opciones
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/carreras">Carreras</a>
+                    <a class="dropdown-item" href="/usuarios">Usuarios</a>
+                    <a class="dropdown-item" href="/estudiantes">Estudiantes</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h1 th:if="${estudiante.estudianteId == null}">Nuevo Estudiante</h1>
+    <h1 th:if="${estudiante.estudianteId != null}">Editar Estudiante</h1>
+    <form th:action="@{/estudiantes/save}" th:object="${estudiante}" method="post">
+        <div class="form-group">
+            <label>ID:</label>
+            <input type="text" th:field="*{estudianteId}" class="form-control" readonly/>
+        </div>
+        <div class="form-group">
+            <label>Usuario ID:</label>
+            <input type="text" th:field="*{usuarioId}" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label>Nombre:</label>
+            <input type="text" th:field="*{nombreEstudiante}" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label>Apellido:</label>
+            <input type="text" th:field="*{apellidoEstudiante}" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label>Carrera ID:</label>
+            <input type="text" th:field="*{carreraId}" class="form-control" required/>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="/estudiantes" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

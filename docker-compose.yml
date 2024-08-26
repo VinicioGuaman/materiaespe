@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  app_mat:
+    build: ProjectFinal
+    mem_limit: 1g
+    ports:
+      - "8083:8080"
+    environment:
+      DB_URL: jdbc:mysql://materia_espe:3306/materia_espe?useSSL=false&serverTimezone=UTC
+      DB_USER_NAME: root
+      DB_PASSWORD: 123
+    restart: always
+    depends_on:
+      materia_espe:
+          condition: service_healthy
+  materia_espe:
+    image: mysql:latest
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_PASSWORD: 123
+      MYSQL_DATABASE: materia_espe
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10

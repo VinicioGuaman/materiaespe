@@ -1,0 +1,70 @@
+<!-- BY VINICIO GUAMÁN PUNTONET.EC USER DEV005 V06-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Mi Aplicación</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Opciones
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/carreras">Carreras</a>
+                    <a class="dropdown-item" href="/usuarios">Usuarios</a>
+                    <a class="dropdown-item" href="/estudiantes">Estudiantes</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h1>Lista de Usuarios</h1>
+    <a href="/usuarios/form" class="btn btn-primary mb-3">Nuevo Usuario</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tipo ID</th>
+            <th>Usuario</th>
+            <th>Contraseña</th>
+            <th>Foto</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.usuarioId}"></td>
+            <td th:text="${usuario.tipoId}"></td>
+            <td th:text="${usuario.user}"></td>
+            <td th:text="${usuario.pass}"></td>
+            <td>
+                <!-- Mostrar la foto -->
+                <img th:src="@{/fotos/{foto}(foto=${usuario.foto})}" alt="Foto del usuario" style="width: 100px; height: auto;">
+            </td>
+            <td>
+                <a th:href="@{/usuarios/form(id=${usuario.usuarioId})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/usuarios/delete(id=${usuario.usuarioId})}" onclick="return confirm('¿Estás seguro?');" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
